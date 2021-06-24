@@ -38,7 +38,7 @@ class Furniture
     {
         $this->materials = new ArrayCollection();
     }
-
+    
     public function getId(): ?int
     {
         return $this->id;

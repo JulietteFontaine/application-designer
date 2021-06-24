@@ -72,7 +72,9 @@ class AppFixtures extends Fixture
             "Petit meuble",
             "Joli meuble",
             "Meuble tordu",
-            "Meuble de meuble"
+            "Meuble de meuble",
+            "Meuble effet cassé",
+            "Meuble stable",
         ];
 
         // Recupération du repo Matières
@@ -84,22 +86,24 @@ class AppFixtures extends Fixture
         $count = 0;
         while ($count < 6) {
             $furniture = new Furniture();
+            
             $furniture->setName($tab_meuble[rand(0, count($tab_meuble) - 1)]);
             $furniture->addMaterial($repoMaterial[rand(0, count($repoMaterial) - 1)]);
             $furniture->setType('armoire');
 
             $manager->persist($furniture);
+            $count++;
         }
-        $count++;
 
-        // $count = 0;
-        // while($count < 6) {
-        // $furniture = new Furniture();
-        // $furniture->setName($tab_meuble[rand(0, count($tab_meuble) - 1)]);
-        // $furniture->addMaterial($repoMatiere[rand(0, 3 - 1)]);
-        // $furniture->setType('etagère');
-        // $manager->persist($furniture);
-        // }
+        $count = 0;
+        while($count < 6) {
+        $furniture = new Furniture();
+        $furniture->setName($tab_meuble[rand(0, count($tab_meuble) - 1)]);
+        $furniture->addMaterial($repoMaterial[rand(0, 3 - 1)]);
+        $furniture->setType('etagère');
+        $manager->persist($furniture);
+        $count++;
+        }
 
         $manager->flush();
     }
