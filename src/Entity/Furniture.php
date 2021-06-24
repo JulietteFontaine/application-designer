@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\FurnitureRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Material;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=FurnitureRepository::class)
@@ -38,7 +38,7 @@ class Furniture
     {
         $this->materials = new ArrayCollection();
     }
-    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,4 +91,5 @@ class Furniture
 
         return $this;
     }
+
 }

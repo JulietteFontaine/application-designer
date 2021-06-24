@@ -77,6 +77,8 @@ class AppFixtures extends Fixture
             "Meuble stable",
         ];
 
+        $tab_type = [ "Armoire", "Etagère" ];
+
         // Recupération du repo Matières
         $repoMaterial = $manager
             ->getRepository(Material::class)
@@ -84,25 +86,20 @@ class AppFixtures extends Fixture
 
         // Creation des meubles et association des meubles aux diff. matière
         $count = 0;
-        while ($count < 6) {
+        while ($count < 12) {
             $furniture = new Furniture();
-            
             $furniture->setName($tab_meuble[rand(0, count($tab_meuble) - 1)]);
-            $furniture->addMaterial($repoMaterial[rand(0, count($repoMaterial) - 1)]);
-            $furniture->setType('armoire');
+            
+            $i = 0;
+            while ($i < 3) {
+                $furniture->addMaterial($repoMaterial[rand(0, 3 - 1)]);
+                $i++;
+            }
 
+            // mixer soit étagère soit armoire pour un meuble
+            $furniture->setType($tab_type[rand(0, 2 - 1)]);
             $manager->persist($furniture);
             $count++;
-        }
-
-        $count = 0;
-        while($count < 6) {
-        $furniture = new Furniture();
-        $furniture->setName($tab_meuble[rand(0, count($tab_meuble) - 1)]);
-        $furniture->addMaterial($repoMaterial[rand(0, 3 - 1)]);
-        $furniture->setType('etagère');
-        $manager->persist($furniture);
-        $count++;
         }
 
         $manager->flush();

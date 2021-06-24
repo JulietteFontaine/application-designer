@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{# {% block title %}
+	{{ title }}
+{% endblock %} #}
+
+{% block body %}
+	<div class="row">
+		<div class="card bg-light mb-3" style="max-width: 20rem;">
+			<div class="card-header">{{ material.name }}
+				<p>{{ material.type }}</p>
+			</div>
+			<div class="card-body">
+				<p class="card-title">{{ material.factory.name }}</p>
+				<p class="card-text"></p>
+				{% for f in material.furnitures %}
+					<a class="card-text" href="{{ path('furniture_sheet', { 'id' : f.id }) }}">
+						{{ f.name }}
+					</a>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
