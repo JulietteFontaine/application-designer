@@ -7,22 +7,24 @@
 {% block body %}
 	<div class="row justify-content-md-center">
 		{% for f in furnitures %}
-			{# {{dump(f)}} #}
-			<div class="card bg-light m-3" style="max-width: 20rem;">
-				<div class="card-header"><strong>{{ f.name }}</strong>
-					<p><em>{{ f.type }}</em></p>
-				</div>
-				<div class="card-body">
-					{# <p class="card-title">{{ f.type }}</p> #}
-					{# <p class="card-text"></p> #}
-					{% for m in f.materials %}
-						<a href="{{ path('material_sheet', { 'id' : m.id }) }}">
-						<span class="card-text">{{ m.name }}</a>
-						</span>
-					{% endfor %}
-				</div>
-			</div>
+				{# {{dump(f)}} #}
+				<div class="card bg-light m-3" style="max-width: 20rem;">
+					<div class="card-header">
+						<strong>{{ f.name }}</strong>
+						<p>
+							<em>{{ f.type }}</em>
+						</p>
+					</div>
+					<div class="card-body">
+						{# <p class="card-title">{{ f.type }}</p> #}
+						{# <p class="card-text"></p> #}
+							{% for m in f.materials %}
+								<a href="{{ path('material_sheet', { 'id' : m.id }) }}"> <span class="card-text">{{ m.name }}</a>
+							</span>
+						{% endfor %}
 
+					</div>
+				</div>
 		{% endfor %}
 	</div>
 
