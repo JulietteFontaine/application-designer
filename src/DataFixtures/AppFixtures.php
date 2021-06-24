@@ -92,7 +92,7 @@ class AppFixtures extends Fixture
             
             $i = 0;
             while ($i < 3) {
-                $furniture->addMaterial($repoMaterial[rand(0, 3 - 1)]);
+                $furniture->addMaterial($repoMaterial[rand(0, count($repoMaterial) - 1)]);
                 $i++;
             }
 
