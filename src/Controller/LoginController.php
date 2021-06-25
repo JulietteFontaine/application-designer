@@ -27,39 +27,43 @@ class LoginController extends AbstractController
      */
     public function loginForm(Request $request, AuthenticationUtils $authenticationUtils)
     {
-        
-        $builder = $this->createFormBuilder();
 
-        $builder->add('email', EmailType::class, [
-            'label' => 'Identifiant',
-            'attr' => [
-                'placeholder' => 'Identifiant'
-            ]
-        ])->add('password', PasswordType::class, [
-                'label' => 'Mot de passe',
-                'attr' => [
-                    'placeholder' => "Mot de passe"
-                ]
-        ]);
-        // ->add('_csrf_token', HiddenType::class);
-        
-        $form = $builder->getForm();
-        $form->handleRequest($request);
-        //dump($_POST);
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
-        // $lastUsername = $authenticationUtils->getLastUsername();
+        $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', [
-            'form' => $form->createView(),
-            'error' => $error
+            // 'form' => $form->createView(),
+            'error' => $error,
+            'last_username' => $lastUsername
         ]);
     }
 
     /**
-     * @Route("/logout", name="security_logout")
+     * @Route("/logout", name="app_logout")
      */
     public function logout()
     {
     }
 }
+ 
+        // FORMULAIRE SYMFONY 
+        
+        // $builder = $this->createFormBuilder();
+
+        // $builder->add('email', EmailType::class, [
+        //     'label' => 'Identifiant',
+        //     'attr' => [
+        //         'placeholder' => 'Identifiant'
+        //     ]
+        // ])->add('password', PasswordType::class, [
+        //         'label' => 'Mot de passe',
+        //         'attr' => [
+        //             'placeholder' => "Mot de passe"
+        //         ]
+        // ]);
+        // ->add('_csrf_token', HiddenType::class);
+        
+        // $form = $builder->getForm();
+        // $form->handleRequest($request);
+        //dump($_POST);

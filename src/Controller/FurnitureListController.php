@@ -3,17 +3,22 @@
 namespace App\Controller;
 
 use App\Repository\FurnitureRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/** 
+ * @Route("/admin")
+ */
 class FurnitureListController extends AbstractController
 {
 
     private $repository;
 
-    public function __construct(FurnitureRepository $furnitureRepository)
+    public function __construct(FurnitureRepository $furnitureRepository, UserRepository $userRepository)
     {
         $this->repository = $furnitureRepository;
+        $this->user = $userRepository;
     }
 
     /** 
@@ -22,19 +27,8 @@ class FurnitureListController extends AbstractController
     public function showListController()
     {
 
-        $furnitures = $this->repository->findAll();
-
-        // $array_e = [];
-        // $array_a = [];
-
-        // foreach ($furnitures as $f) {
-        //     $types = $f->getType();
-        //     if ($types == "etagère") {
-
-        //     } else {
-
-        //     }
-        // }
+        $user = $this->getUser();
+        $furnitures = $user->getFurnitures();
 
         return $this->render("Furnitures/FurnitureList.html.twig", [
             'furnitures' => $furnitures

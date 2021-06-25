@@ -6,6 +6,9 @@ use App\Repository\FurnitureRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/** 
+ * @Route("/admin")
+ */
 class FurnitureSheetController extends AbstractController
 {
 

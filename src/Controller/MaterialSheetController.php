@@ -6,6 +6,9 @@ use App\Repository\MaterialRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/** 
+ * @Route("/admin")
+ */
 class MaterialSheetController extends AbstractController
 {
 

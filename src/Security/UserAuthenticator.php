@@ -33,22 +33,25 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
     {
         //$email = $request->request->get('email', '');
         //$request->request->get('form')['email'] == $_POST['form']['email'];
-        $email = $request->request->get('form', '')['email'];
-        $password = $request->request->get('form', '')['password'];
+        //$email = $request->request->get('form', '')['email'];
+        //$password = $request->request->get('form', '')['password'];
+
+        $email = $request->request->get('email', '');
+        $password = $request->request->get('password', '');
+
         $request->getSession()->set(Security::LAST_USERNAME, $email);
 
         return new Passport(
             new UserBadge($email),
             new PasswordCredentials($password),
-            // [
-            //     new CsrfTokenBadge('authenticate', $request->get('_csrf_token')),
-            // ]
+            [
+                new CsrfTokenBadge('authenticate', $request->get('_csrf_token')),
+            ]
         );
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        dump('OK');
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
