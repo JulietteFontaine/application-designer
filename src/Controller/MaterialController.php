@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Material;
 use App\Form\MaterialType;
+use App\Repository\FurnitureRepository;
 use App\Repository\MaterialRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,17 +26,17 @@ class MaterialController extends AbstractController
         ]);
     }
 
-    /** 
-     * @Route("/materials/{id}", name="material_sheet")
-     */
-    public function showMaterialSheet($id)
-    {
-        $material = $this->repository->find($id);
+    // /** 
+    //  * @Route("/materials/{id}", name="material_sheet")
+    //  */
+    // public function showMaterialSheet($id)
+    // {
+    //     $material = $this->repository->find($id);
 
-        return $this->render("material/MaterialSheet.html.twig", [
-            'material' => $material
-        ]);
-    }
+    //     return $this->render("material/MaterialSheet.html.twig", [
+    //         'material' => $material
+    //     ]);
+    // }
 
     /**
      * @Route("/new", name="material_new", methods={"GET","POST"})
@@ -60,15 +61,19 @@ class MaterialController extends AbstractController
         ]);
     }
 
-    // /**
-    //  * @Route("/{id}", name="material_show", methods={"GET"})
-    //  */
-    // public function show(Material $material): Response
-    // {
-    //     return $this->render('material/show.html.twig', [
-    //         'material' => $material,
-    //     ]);
-    // }
+    /**
+     * @Route("/{id}", name="material_show", methods={"GET"})
+     */
+    public function show(Material $material, FurnitureRepository $furnitureRepository): Response
+    {
+        $furnitures = $furnitureRepository->findFurnitureByMaterialAndUser($material, $this->getUser());
+        // dump($furnitures);
+
+        return $this->render('material/show.html.twig', [
+            'material' => $material,
+            'furnitures' => $furnitures
+        ]);
+    }
 
     /**
      * @Route("/{id}/edit", name="material_edit", methods={"GET","POST"})
@@ -95,7 +100,7 @@ class MaterialController extends AbstractController
      */
     public function delete(Request $request, Material $material): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$material->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $material->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($material);
             $entityManager->flush();

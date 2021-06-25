@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Furniture;
+use App\Entity\Material;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -47,4 +49,16 @@ class FurnitureRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findFurnitureByMaterialAndUser(Material $material, User $user)
+    {
+        return $this->createQueryBuilder('f')
+            ->where('f.user = :user')
+            ->join('f.materials', 'm')
+            ->andWhere('m = :material')
+            ->setParameter('user', $user)
+            ->setParameter('material', $material)
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -14,7 +14,7 @@
 			<div class="card-body">
 				<p class="card-text"></p>
 				{% for f in furniture.materials %}
-					<a class="card-text" href="{{ path('material_sheet', { 'id' : f.id }) }}">
+					<a class="card-text" href="{{ path('material_show', { 'id' : f.id }) }}">
 						<span>{{ f.name }}
 						</a>
 					</span>

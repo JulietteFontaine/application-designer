@@ -8,7 +8,7 @@
 			{% endblock %}
 		</title>
 		{# Run `composer require symfony/webpack-encore-bundle`
-																						           and uncomment the following Encore helpers to start using Symfony UX #}
+																								           and uncomment the following Encore helpers to start using Symfony UX #}
 		{% block stylesheets %}
 			<link rel="stylesheet" href='https://bootswatch.com/5/sandstone/bootstrap.min.css'>
 
@@ -18,31 +18,35 @@
 	</head>
 	<body>
 		{% if app.user %}
-		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="#">Mes Meubles</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+				<div class="container-fluid">
+					<a class="navbar-brand" href="#">Mes Meubles</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
 
-				<div class="collapse navbar-collapse" id="navbarColor01">
-					<ul class="navbar-nav me-auto">
-						<li class="nav-item">
-							<a class="nav-link" href="{{ path('list_furniture') }}">Liste des Meubles
-							</a>
-						</li>
-						<li class="nav-item">
-							{% if app.user %}
-								<div class="mb-3">
-									<a href="{{ path('app_logout') }}">Logout</a>
-								</div>
-							{% endif %}
-						</li>
+					<div class="collapse navbar-collapse" id="navbarColor01">
+						<ul class="navbar-nav me-auto">
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('list_furniture') }}">Liste des Meubles
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('material_index') }}">Liste des Matériaux
+								</a>
+							</li>
+							<li class="nav-item">
+								{% if app.user %}
+									<div class="mb-3">
+										<a href="{{ path('app_logout') }}">Logout</a>
+									</div>
+								{% endif %}
+							</li>
 
-					</ul>
+						</ul>
+					</div>
 				</div>
-			</div>
-		</nav>
+			</nav>
 		{% endif %}
 		{# {% endif %} #}
 

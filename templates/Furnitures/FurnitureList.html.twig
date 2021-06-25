@@ -21,7 +21,7 @@
 					{# <p class="card-title">{{ f.type }}</p> #}
 					{# <p class="card-text"></p> #}
 						{% for m in f.materials %}
-							<a href="{{ path('material_sheet', { 'id' : m.id }) }}"> <span class="card-text">{{ m.name }}</a>
+							<a href="{{ path('material_show', { 'id' : m.id }) }}"> <span class="card-text">{{ m.name }}</a>
 						</span>
 					{% endfor %}
 

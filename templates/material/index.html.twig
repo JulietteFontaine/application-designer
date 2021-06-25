@@ -3,26 +3,28 @@
 {% block title %}Material index{% endblock %}
 
 {% block body %}
-    <h1>Material index</h1>
+<div class="row justify-content-md-center">
+    <h1>Liste des Matériaux</h1>
+    <a href="{{ path('material_new') }}">Créer nouveau</a>
 
-    <table class="table">
+    <table class="table" style="max-width: 40rem;">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Type</th>
-                <th>actions</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         {% for material in materials %}
             <tr>
-                <td>{{ material.id }}</td>
-                <td>{{ material.name }}</td>
+                <td>
+                 <a href="{{ path('material_show', {'id': material.id}) }}">
+                <strong>{{ material.name }}</strong></td>
+                </a>
                 <td>{{ material.type }}</td>
                 <td>
-                    <a href="{{ path('material_show', {'id': material.id}) }}">show</a>
-                    <a href="{{ path('material_edit', {'id': material.id}) }}">edit</a>
+                    <a href="{{ path('material_edit', {'id': material.id}) }}">modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -32,6 +34,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('material_new') }}">Créer nouvelle</a>
+</div>
 {% endblock %}
