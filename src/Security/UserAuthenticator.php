@@ -31,28 +31,31 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
 
     public function authenticate(Request $request): PassportInterface
     {
-        $email = $request->request->get('email', '');
-
+        //$email = $request->request->get('email', '');
+        //$request->request->get('form')['email'] == $_POST['form']['email'];
+        $email = $request->request->get('form', '')['email'];
+        $password = $request->request->get('form', '')['password'];
         $request->getSession()->set(Security::LAST_USERNAME, $email);
 
         return new Passport(
             new UserBadge($email),
-            new PasswordCredentials($request->request->get('password', '')),
-            [
-                new CsrfTokenBadge('authenticate', $request->get('_csrf_token')),
-            ]
+            new PasswordCredentials($password),
+            // [
+            //     new CsrfTokenBadge('authenticate', $request->get('_csrf_token')),
+            // ]
         );
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        dump('OK');
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
 
         // For example:
-        //return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return new RedirectResponse($this->urlGenerator->generate('list_furniture'));
+        throw new \Exception('TODO: provide a valid redirect inside ' . __FILE__);
     }
 
     protected function getLoginUrl(Request $request): string

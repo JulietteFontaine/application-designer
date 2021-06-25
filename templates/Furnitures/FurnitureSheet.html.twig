@@ -5,17 +5,19 @@
 {% endblock %} #}
 
 {% block body %}
-	<div class="row">
-		<div class="card bg-light mb-3" style="max-width: 20rem;">
-			<div class="card-header">{{ furniture.name }}
+	<div class="row justify-content-md-center">
+	
+		<div class="card bg-light m-3" style="max-width: 20rem;">
+			<div class="card-header"><strong>{{ furniture.name }}</strong>
 				<p>{{ furniture.type }}</p>
 			</div>
 			<div class="card-body">
 				<p class="card-text"></p>
 				{% for f in furniture.materials %}
 					<a class="card-text" href="{{ path('material_sheet', { 'id' : f.id }) }}">
-						{{ f.name }}
-					</a>
+						<span>{{ f.name }}
+						</a>
+					</span>
 				{% endfor %}
 			</div>
 		</div>
