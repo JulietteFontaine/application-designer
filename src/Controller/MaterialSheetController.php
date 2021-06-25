@@ -19,15 +19,15 @@ class MaterialSheetController extends AbstractController
         $this->repository = $materialRepository;
     }
 
-    /** 
-     * @Route("/materiel/{id}", name="material_sheet")
-     */
-    public function showMaterialSheet($id)
-    {
-        $material = $this->repository->find($id);
+    // /** 
+    //  * @Route("/materiel/{id}", name="material_sheet")
+    //  */
+    // public function showMaterialSheet($id)
+    // {
+    //     $material = $this->repository->find($id);
 
-        return $this->render("Materials/MaterialSheet.html.twig", [
-            'material' => $material
-        ]);
-    }
+    //     return $this->render("Material/MaterialSheet.html.twig", [
+    //         'material' => $material
+    //     ]);
+    // }
 }
